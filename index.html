@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>In Montagna Come una Volta</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3Cpath d='M8,104 L58,28 L88,66 L118,18 L148,58 Q166,72 152,90 Q140,102 150,100' fill='none' stroke='%232C4130' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='150' cy='100' r='14' fill='%23B5541F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -60,16 +59,16 @@
   }
   .nav-inner {
     max-width: 760px; margin: 0 auto; padding: 14px 24px;
-    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-    overflow-x: auto; scrollbar-width: none;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
   }
-  .nav-inner::-webkit-scrollbar { display: none; }
-  .nav-brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1rem; white-space: nowrap; letter-spacing: 0.01em; display: flex; align-items: center; gap: 9px; }
+  .nav-brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.05rem; white-space: nowrap; letter-spacing: 0.01em; display: flex; align-items: center; gap: 9px; }
   .brand-mark { color: var(--pine-deep); flex-shrink: 0; }
   .brand-mark .dot { fill: var(--rust); }
-  .nav-brand svg.brand-mark { height: 22px; width: auto; }
-  .nav-links { display: flex; gap: 18px; white-space: nowrap; }
-  .nav-links a { font-size: 0.86rem; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  .nav-brand svg.brand-mark { height: 24px; width: auto; display: block; }
+  .nav-links {
+    display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 18px;
+  }
+  .nav-links a { font-size: 0.86rem; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; white-space: nowrap; }
   .nav-links a:hover { color: var(--pine-deep); border-bottom-color: var(--pine-deep); }
 
   header.hero {
@@ -139,22 +138,13 @@
   .trip-media { margin-top: 18px; padding: 16px; border: 1px dashed var(--line); border-radius: var(--radius); font-size: 0.85rem; color: var(--stone); text-align: center; }
   .add-trip-note { font-size: 0.9rem; color: var(--stone); margin-top: 8px; }
 
-  .gallery { margin-top: 18px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-  @media (max-width: 560px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
-  .album-link { margin-top: 10px; font-size: 0.85rem; }
-  .gallery button { padding: 0; border: none; background: none; cursor: zoom-in; display: block; }
-  .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); display: block; }
-  .lightbox {
-    display: none; position: fixed; inset: 0; z-index: 100; background: rgba(20,22,18,0.92);
-    align-items: center; justify-content: center; padding: 24px; padding-top: calc(24px + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  .album-card {
+    display: block; margin-top: 18px; padding: 18px; text-align: center;
+    border: 1px solid color-mix(in srgb, var(--amber) 35%, var(--line)); border-radius: var(--radius);
+    background: color-mix(in srgb, var(--amber) 8%, var(--paper-2)); color: var(--ink); text-decoration: none;
+    font-size: 0.95rem; transition: background 0.15s ease;
   }
-  .lightbox.open { display: flex; }
-  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 2px; }
-  .lightbox-close {
-    position: absolute; top: calc(18px + env(safe-area-inset-top, 0px)); right: 18px;
-    background: none; border: none; color: #F3F0E6; font-size: 1.6rem; cursor: pointer; line-height: 1;
-  }
+  .album-card:hover { background: color-mix(in srgb, var(--amber) 16%, var(--paper-2)); }
 
   /* stats */
   .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 44px; }
@@ -497,11 +487,6 @@
   In Montagna Come una Volta — diario di gruppo, aggiornato dopo ogni gita.
 </footer>
 
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightbox-close" aria-label="Chiudi">✕</button>
-  <img id="lightbox-img" src="" alt="">
-</div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   var CURRENT_YEAR = 2026;
@@ -534,22 +519,7 @@
         { name: "Gianluigi Lenzi", year: 1993 }
       ],
       mediaNote: "Foto e video di questa gita non ancora caricati — aggiungeteli qui appena li avete.",
-      albumUrl: "https://photos.app.goo.gl/wfUxrKdnbuLCDxFV9",
-      photos: [
-        "photos/p14.jpeg",
-        "photos/p13.jpeg",
-        "photos/p12.jpeg",
-        "photos/p11.jpeg",
-        "photos/p10.jpeg",
-        "photos/p09.jpeg",
-        "photos/p08.jpeg",
-        "photos/p07.jpeg",
-        "photos/p06.jpeg",
-        "photos/p05.jpeg",
-        "photos/p04.jpeg",
-        "photos/p03.jpeg",
-        "photos/p02.jpeg"
-      ]
+      albumUrl: "https://photos.app.goo.gl/wfUxrKdnbuLCDxFV9"
     }
   ];
 
@@ -642,13 +612,8 @@
       return '<li>' + p.name + ' <span class="year">· ' + p.year + '</span>' + badges + '</li>';
     }).join("");
     var mediaHtml;
-    if (t.photos && t.photos.length) {
-      mediaHtml = '<div class="gallery">' + t.photos.map(function (src) {
-        return '<button type="button" data-src="' + src + '"><img src="' + src + '" alt="' + t.name + '" loading="lazy"></button>';
-      }).join("") + '</div>';
-      if (t.albumUrl) {
-        mediaHtml += '<div class="album-link"><a href="' + t.albumUrl + '" target="_blank" rel="noopener">Vedi l\'album completo (foto e video) ↗</a></div>';
-      }
+    if (t.albumUrl) {
+      mediaHtml = '<a class="album-card" href="' + t.albumUrl + '" target="_blank" rel="noopener">Vedi le foto e i video della gita — album condiviso ↗</a>';
     } else {
       mediaHtml = '<div class="trip-media">' + t.mediaNote + '</div>';
     }
@@ -668,19 +633,6 @@
       '<ul class="people-list">' + peopleHtml + '</ul></div>' +
       mediaHtml;
     tripCards.appendChild(div);
-  });
-
-  // ---- lightbox ----
-  var lightbox = document.getElementById("lightbox");
-  var lightboxImg = document.getElementById("lightbox-img");
-  document.getElementById("lightbox-close").addEventListener("click", function () { lightbox.classList.remove("open"); });
-  lightbox.addEventListener("click", function (e) { if (e.target === lightbox) lightbox.classList.remove("open"); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") lightbox.classList.remove("open"); });
-  tripCards.addEventListener("click", function (e) {
-    var btn = e.target.closest("[data-src]");
-    if (!btn) return;
-    lightboxImg.src = btn.getAttribute("data-src");
-    lightbox.classList.add("open");
   });
 
   // ---- age cards ----
