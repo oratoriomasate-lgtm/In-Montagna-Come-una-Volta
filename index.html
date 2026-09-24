@@ -199,6 +199,8 @@
   .detail-item .v { font-size: 0.92rem; }
 
   /* packing */
+  .zaino-subhead { font-size: 1.05rem; margin: 0 0 16px; }
+  .zaino-subhead:not(:first-of-type) { margin-top: 44px; }
   .pack-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   @media (max-width: 560px) { .pack-cols { grid-template-columns: 1fr; } }
   .pack-col { border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; background: var(--paper-2); }
@@ -233,11 +235,14 @@
     background: var(--paper-2);
   }
   .next-banner .wrap {
-    padding: 18px 24px; text-align: center;
+    padding: 24px; text-align: center;
   }
   .next-banner .label { font-size: 0.78rem; color: var(--stone); }
   .next-banner .value { font-family: 'Fraunces', serif; font-size: 1.1rem; margin-top: 2px; }
   .next-banner .countdown { font-size: 0.85rem; color: var(--amber); font-weight: 600; margin-top: 6px; }
+  .next-banner .next-trip-name { font-family: 'Fraunces', serif; font-size: 1.4rem; margin-top: 16px; }
+  .next-banner .next-trip-region { font-size: 0.85rem; color: var(--ink-soft); margin-top: 3px; }
+  .next-banner .next-trip-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
 
   /* badges */
   .badge {
@@ -448,30 +453,58 @@
   <section id="zaino">
     <div class="wrap">
       <div class="section-head"><span class="section-num">05</span><h2 class="section-title">Cosa portare</h2></div>
-      <p class="section-intro">La lista base dello zaino, divisa per stagione.</p>
+      <p class="section-intro">Abbigliamento e cibo per lo zaino, divisi per stagione.</p>
+
+      <h3 class="zaino-subhead">Abbigliamento</h3>
       <div class="pack-cols">
         <div class="pack-col summer">
-          <h3>Bella stagione</h3>
-          <div class="sub">Primavera / estate</div>
+          <div class="sub">Bella stagione — primavera / estate</div>
           <ul>
-            <li>Maglietta e calzini di ricambio</li>
-            <li>Acqua a sufficienza (almeno 1,5 l)</li>
-            <li>Cibo leggero per il pranzo al sacco</li>
+            <li>Maglietta traspirante + una di ricambio</li>
+            <li>Pantaloncini o pantaloni leggeri</li>
+            <li>Calzini da trekking (no cotone)</li>
             <li>Felpa o giacca leggera per le soste</li>
             <li>K-way / antipioggia</li>
-            <li>Cappellino e crema solare</li>
+            <li>Cappellino e occhiali da sole</li>
+            <li>Scarpe da trekking con buon grip</li>
           </ul>
         </div>
         <div class="pack-col winter">
-          <h3>Stagione fredda</h3>
-          <div class="sub">Autunno / inverno</div>
+          <div class="sub">Stagione fredda — autunno / inverno</div>
           <ul>
             <li>Giacca a vento / guscio impermeabile</li>
             <li>Pantaloni lunghi tecnici</li>
-            <li>Strato intermedio caldo (pile o piumino leggero)</li>
-            <li>Guanti e berretto</li>
-            <li>Calzini caldi di ricambio</li>
-            <li>Thermos con bevanda calda</li>
+            <li>Pile o piumino leggero</li>
+            <li>Berretto e guanti</li>
+            <li>Calzini caldi da trekking</li>
+            <li>Scarponi impermeabili</li>
+            <li>Ghette, se c'è neve fresca</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="zaino-subhead">Cibo e acqua</h3>
+      <div class="pack-cols">
+        <div class="pack-col summer">
+          <div class="sub">Bella stagione — primavera / estate</div>
+          <ul>
+            <li>Acqua abbondante (almeno 1,5–2 l)</li>
+            <li>Frutta secca (noci, mandorle, uvetta)</li>
+            <li>Barrette energetiche</li>
+            <li>Panino leggero o focaccia</li>
+            <li>Frutta fresca (mela, banana)</li>
+            <li>Sali minerali, se fa molto caldo</li>
+          </ul>
+        </div>
+        <div class="pack-col winter">
+          <div class="sub">Stagione fredda — autunno / inverno</div>
+          <ul>
+            <li>Thermos con tè o tisana calda</li>
+            <li>Cioccolato fondente</li>
+            <li>Barrette energetiche</li>
+            <li>Panino più sostanzioso (formaggio, salame)</li>
+            <li>Frutta secca</li>
+            <li>Qualcosa di caldo al rifugio, come premio finale</li>
           </ul>
         </div>
       </div>
@@ -539,7 +572,22 @@
   ];
 
   // Prossima gita in programma — null finché non è ancora fissata una data.
-  var nextTrip = { dateLabel: "Domenica 25 ottobre 2026", timeLabel: "7:00", iso: "2026-10-25T07:00:00" };
+  var nextTrip = {
+    dateLabel: "Domenica 25 ottobre 2026",
+    timeLabel: "7:00",
+    iso: "2026-10-25T07:00:00",
+    name: "Rifugio Fratelli Calvi",
+    region: "Alpi Orobie, Val Brembana",
+    province: "Bergamo",
+    regionName: "Lombardia",
+    startPoint: "Carona (parcheggio sopra il paese, 1.222 m)",
+    arrivalPoint: "2.015 m",
+    distanceKm: 14,
+    elevationM: 800,
+    durationLabel: "2h40 in salita (~4h30 a/r)",
+    difficulty: "Media (E — Escursionistico)",
+    weatherUrl: "https://www.3bmeteo.com/meteo/carona"
+  };
 
   function age(year) { return CURRENT_YEAR - year; }
   function avgAge(participants) {
@@ -553,6 +601,13 @@
     var h = Math.floor(min / 60), m = Math.round(min % 60);
     return h + "h" + (m ? " " + m + "m" : "");
   }
+
+  var ICON_RULER = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M2 12 L12 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M4 10 L5.5 11.5 M6.5 8 L8 9.5 M9 5.5 L10.5 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+  var ICON_PEAK = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M2 13 L6 6 L8.3 9.3 L11 5 L14 13 Z" fill="currentColor"/></svg>';
+  var ICON_CLOCK = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.7 V8 L10.3 9.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+  var ICON_PIN = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M8 14.2 C8 14.2 13 9.3 13 5.9 A5 5 0 0 0 3 5.9 C3 9.3 8 14.2 8 14.2 Z" fill="currentColor"/><circle cx="8" cy="5.9" r="1.9" fill="var(--paper-2)"/></svg>';
+  var ICON_FLAG = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M3 2 V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 2.5 L12.5 5 L3 8 Z" fill="currentColor"/></svg>';
+  var ICON_WEATHER = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><circle cx="6.5" cy="5.5" r="3" fill="currentColor" opacity="0.85"/><path d="M3.5 12 a3.3 3.3 0 0 1 6.6 -1.6 a2.6 2.6 0 0 1 -0.4 5.1 H4.3 a2.6 2.6 0 0 1 -0.8 -3.5 Z" fill="currentColor"/></svg>';
 
   // ---- geographic map calibration (calibrated on the real Lombardy region bbox) ----
   var LOMBARDY_PX = { xmin: 96.3, xmax: 246.5, ymin: 34.5, ymax: 177.6 };
@@ -588,9 +643,20 @@
   // ---- next trip banner ----
   var nextBanner = document.getElementById("next-banner-content");
   if (nextTrip) {
+    var detailPills =
+      '<span class="pill place">' + ICON_FLAG + 'Da ' + nextTrip.startPoint + '</span>' +
+      '<span class="pill metric">' + ICON_PEAK + 'Arrivo ' + nextTrip.arrivalPoint + ' · ' + fmtElev(nextTrip.elevationM) + '</span>' +
+      '<span class="pill metric">' + ICON_RULER + fmtKm(nextTrip.distanceKm) + '</span>' +
+      '<span class="pill metric">' + ICON_CLOCK + nextTrip.durationLabel + '</span>' +
+      '<span class="pill">' + nextTrip.difficulty + '</span>' +
+      (nextTrip.weatherUrl ? '<a class="pill route" href="' + nextTrip.weatherUrl + '" target="_blank" rel="noopener">' + ICON_WEATHER + 'Previsioni meteo ↗</a>' : '');
     nextBanner.innerHTML =
-      '<div><div class="label">Prossima gita</div><div class="value">' + nextTrip.dateLabel + ' · ore ' + nextTrip.timeLabel + '</div>' +
-      '<div class="countdown" id="countdown-value"></div></div>';
+      '<div class="label">Prossima gita</div>' +
+      '<div class="value">' + nextTrip.dateLabel + ' · ore ' + nextTrip.timeLabel + '</div>' +
+      '<div class="countdown" id="countdown-value"></div>' +
+      '<div class="next-trip-name">' + nextTrip.name + '</div>' +
+      '<div class="next-trip-region">' + nextTrip.region + ' — ' + nextTrip.province + ', ' + nextTrip.regionName + '</div>' +
+      '<div class="next-trip-pills">' + detailPills + '</div>';
     (function () {
       var target = new Date(nextTrip.iso).getTime();
       function update() {
@@ -608,7 +674,7 @@
     })();
   } else {
     nextBanner.innerHTML =
-      '<div><div class="label">Prossima gita</div><div class="value">Ancora da fissare</div></div>';
+      '<div class="label">Prossima gita</div><div class="value">Ancora da fissare</div>';
   }
 
   // ---- who's been on every trip / whose first trip is this one ----
@@ -622,11 +688,6 @@
   });
   var tripCountByName = {};
   trips.forEach(function (t) { t.participants.forEach(function (p) { tripCountByName[p.name] = (tripCountByName[p.name] || 0) + 1; }); });
-
-  var ICON_RULER = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M2 12 L12 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M4 10 L5.5 11.5 M6.5 8 L8 9.5 M9 5.5 L10.5 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
-  var ICON_PEAK = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M2 13 L6 6 L8.3 9.3 L11 5 L14 13 Z" fill="currentColor"/></svg>';
-  var ICON_CLOCK = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.7 V8 L10.3 9.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
-  var ICON_PIN = '<svg viewBox="0 0 16 16" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M8 14.2 C8 14.2 13 9.3 13 5.9 A5 5 0 0 0 3 5.9 C3 9.3 8 14.2 8 14.2 Z" fill="currentColor"/><circle cx="8" cy="5.9" r="1.9" fill="var(--paper-2)"/></svg>';
 
   // ---- trip cards ----
   var tripCards = document.getElementById("trip-cards");
